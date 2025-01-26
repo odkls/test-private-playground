@@ -34,13 +34,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [checkout] # 액션 디렉토리를 가져오는 checkout 작업이 선행되어야 함
     steps:
-      # node.js 환경 설정과 의존성 설치
       - name: Setup Node.js Environment
         uses: ./.github/actions/setup-node
-
-      # 의존성 캐싱
-      - name: Cache dependencies
-        uses: actions/cache@v2
 
   # 연결된 이슈의 라벨을 PR에 추가하는 작업
   sync-labels:
