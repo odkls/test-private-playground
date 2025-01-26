@@ -63,7 +63,7 @@ jobs:
       - name: Move to Review Pipeline
         uses: ./.github/actions/zenhub-move-issue
         with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           zenhub-token: ${{ secrets.ZENHUB_TOKEN }}
-          repo-id: ${{ vars.ZENHUB_REPO_ID }}
-          workspace-id: ${{ vars.ZENHUB_WORKSPACE_ID }}
+          workspace-id: ${{ vars.ZENHUB_WORKSPACE_ID }} # https://github.com/ZenHubIO/API?tab=readme-ov-file#notes-1
           pipeline-id: ${{ vars.ZENHUB_REVIEW_PIPELINE_ID }}
