@@ -36,6 +36,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [checkout] # 액션 디렉토리를 가져오는 checkout 작업이 선행되어야 함
     steps:
+      - name: List checked-out files
+        run: ls -R .github/actions
       - name: Setup Node.js Environment
         uses: ./.github/actions/setup-node
 
