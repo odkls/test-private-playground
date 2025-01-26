@@ -28,6 +28,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }} # Github Actions에서 사용하는 기본 토큰
           fetch-depth: 1 # 가장 최근 커밋만 가져오기
           sparse-checkout: .github/actions # 액션 디렉토리만 가져오기
+      - name: List checked-out files
+        run: ls -R .github/actions
 
   # 액션 실행을 위한 Node.js 환경 설정
   setup-node:
