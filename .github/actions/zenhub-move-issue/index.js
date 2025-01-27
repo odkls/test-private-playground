@@ -1,7 +1,7 @@
 import * as core from "@actions/core";
 import * as github from "@actions/github";
 import axios from "axios";
-import { getIssueNumber } from "../utils/getIssueNumber";
+import { getIssueNumber } from "../utils/getIssueNumber.js";
 
 /** 메인 액션 함수 */
 const run = async () => {
