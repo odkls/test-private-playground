@@ -20,7 +20,7 @@ jobs:
           reviewers: ${{ vars.REVIEWERS }} # 리뷰할 수 있는 사람의 목록
 
   # PR에 라벨을 추가하고 이슈를 이동하는 작업
-  manage:
+  automate-pr-review:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write # PR에 라벨을 추가하고 이슈를 이동하기 위한 권한

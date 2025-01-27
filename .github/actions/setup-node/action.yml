@@ -16,6 +16,7 @@ runs:
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
       run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+      shell: bash
 
     # Step 3: Yarn 캐시 복원
     - name: Restore Yarn cache
@@ -29,6 +30,7 @@ runs:
     # Step 4: 의존성 설치
     - name: install dependencies
       run: yarn install
+      shell: bash
 
     # Step 5: Yarn 캐시 저장
     - name: Save Yarn cache
