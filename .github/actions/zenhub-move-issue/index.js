@@ -57,7 +57,7 @@ const getActionInputs = () => {
  * @see https://docs.github.com/ko/rest/repos/repos?apiVersion=2022-11-28#get-a-repository
  */
 const getRepoId = async (octokit, owner, repo) => {
-  const { data } = await octokit.repos.get({ owner, repo });
+  const { data } = await octokit.rest.repos.get({ owner, repo });
   return data.id;
 };
 
