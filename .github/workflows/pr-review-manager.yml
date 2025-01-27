@@ -49,6 +49,6 @@ jobs:
         uses: ./.github/actions/zenhub-move-issue
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          zenhub-token: ${{ secrets.ZENHUB_TOKEN }}
-          workspace-id: ${{ vars.ZENHUB_WORKSPACE_ID }} # https://github.com/ZenHubIO/API?tab=readme-ov-file#notes-1
-          pipeline-id: ${{ vars.ZENHUB_REVIEW_PIPELINE_ID }}
+          zenhub_token: ${{ secrets.ZENHUB_TOKEN }}
+          workspace_id: ${{ vars.ZENHUB_WORKSPACE_ID }} # https://github.com/ZenHubIO/API?tab=readme-ov-file#notes-1
+          pipeline_id: ${{ vars.ZENHUB_REVIEW_PIPELINE_ID }}
