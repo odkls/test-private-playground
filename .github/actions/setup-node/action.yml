@@ -30,7 +30,7 @@ runs:
     # Step 4: 의존성 설치
     - name: install dependencies
       run: yarn install
-      working-directory: .github/actionsㄴ
+      working-directory: .github/actions
       shell: bash
 
     # Step 5: Yarn 캐시 저장
