@@ -44,9 +44,9 @@ const run = async () => {
 /** 액션에 전달된 인풋을 가져오는 함수 */
 const getActionInputs = () => {
   const token = core.getInput("token");
-  const zenhubToken = core.getInput("zenhub-token");
-  const workspaceId = core.getInput("workspace-id");
-  const pipelineId = core.getInput("pipeline-id");
+  const zenhubToken = core.getInput("zenhub_token");
+  const workspaceId = core.getInput("workspace_id");
+  const pipelineId = core.getInput("pipeline_id");
 
   return { token, zenhubToken, workspaceId, pipelineId };
 };
