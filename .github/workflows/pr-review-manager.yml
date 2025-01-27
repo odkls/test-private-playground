@@ -37,16 +37,19 @@ jobs:
       # Node.js 환경 설정
       - name: Setup Node.js Environment
         uses: ./.github/actions/setup-node
+        working-directory: .github/actions
 
       # PR에 라벨을 추가하는 작업
       - name: Sync labels from linked issues
         uses: ./.github/actions/sync-labels
+        working-directory: .github/actions
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       # PR을 Review Pipeline로 이동하는 작업
       - name: Move to Review Pipeline
         uses: ./.github/actions/zenhub-move-issue
+        working-directory: .github/actions
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           zenhub-token: ${{ secrets.ZENHUB_TOKEN }}
