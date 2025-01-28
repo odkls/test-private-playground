@@ -12,7 +12,7 @@ const run = async () => {
     const { prNumber, branchName, owner, repo } = getPRContext(context);
 
     // step 1. 이슈 라벨 추출
-    const issueNumber = getIssueNumberFromBranch(github);
+    const issueNumber = getIssueNumberFromBranch();
     if (!issueNumber) {
       core.info("💬 브랜치 이름에 이슈 번호가 없습니다. 액션을 종료합니다.");
       return;
