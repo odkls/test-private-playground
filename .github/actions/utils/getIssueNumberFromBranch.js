@@ -9,7 +9,7 @@ import * as github from "@actions/github";
 const getIssueNumberFromBranch = () => {
   let branchName = "";
 
-  core.info(`💬 이벤트 이름: ${github.event_name}`);
+  core.info(`💬 이벤트 이름: ${github}`);
   if (github.event_name === "pull_request") {
     // PR 이벤트인 경우
     branchName = github.context.payload.pull_request.head.ref;
