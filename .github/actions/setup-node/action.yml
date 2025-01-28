@@ -24,19 +24,30 @@ runs:
       id: yarn-cache
       with:
         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('.github/actions/yarn.lock') }}
         restore-keys: ${{ runner.os }}-yarn-
 
-    # Step 4: 의존성 설치
+    # Step 4: 디버깅 - 캐시 경로 및 상태 확인
+    - name: Debug Yarn Cache Directory
+      run: |
+        echo "Yarn cache directory: ${{ steps.yarn-cache-dir-path.outputs.dir }}"
+      shell: bash
+
+    - name: Debug Cache Hit
+      run: |
+        echo "Cache hit: ${{ steps.yarn-cache.outputs.cache-hit }}"
+      shell: bash
+
+    # Step 5: 의존성 설치
     - name: install dependencies
       run: yarn install
       working-directory: .github/actions
       shell: bash
 
-    # Step 5: Yarn 캐시 저장
+    # Step 6: Yarn 캐시 저장
     - name: Save Yarn cache
       if: steps.yarn-cache.outputs.cache-hit != 'true'
       uses: actions/cache@v4
       with:
         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-        key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+        key: ${{ runner.os }}-yarn-${{ hashFiles('.github/actions/yarn.lock') }}
