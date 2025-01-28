@@ -6,12 +6,15 @@ on:
       - "**"
 
 jobs:
-  move-issue-to-in-progress:
+  filter-branch:
     runs-on: ubuntu-latest
+    outputs:
+      continue: ${{ steps.filter.outputs.continue }} # 브랜치 이름 형식이 맞아 액션을 실행할지 여부
     steps:
       # 액션을 실행할 형식의 브랜치 이름을 필터링
       # 예: feat/#1-branche-name, fix/#2-branch-name
       - name: filter branch name
+        id: filter
         run: |
           branch_name="${{ github.ref_name }}" # 브랜치 이름 가져오기
           regex='^[a-zA-Z]+/#[0-9]+-.*$' # 정규식: "[a-zA-Z]*/#[0-9]-*"
@@ -19,9 +22,16 @@ jobs:
           # 정규식에 맞지 않는 브랜치 이름이면 액션 종료
           if [[ ! "$branch_name" =~ $regex ]]; then
             echo "💬 액션을 실행할 브랜치 형식이 아니므로 액션을 종료합니다."
-            exit 0
+            echo "continue=false" >> $GITHUB_OUTPUT
+          else
+            echo "continue=true" >> $GITHUB_OUTPUT
           fi
 
+  move-issue-to-in-progress:
+    runs-on: ubuntu-latest
+    needs: filter-branch # filter-branch 액션을 성공적으로 실행했을 때만 실행
+    if: needs.filter-branch.outputs.continue == 'true' # filter-branch 액션이 true일 때만 실행
+    steps:
       # 액션에 필요한 파일을 가져오기 위한 작업
       - name: Checkout Action
         uses: actions/checkout@v4 # https://github.com/actions/checkout
