@@ -1,0 +1,31 @@
+name: Move Issue to In Progress Pipeline
+
+on:
+  create:
+    branches:
+      - "[a-zA-Z]*/#[0-9]-*" # 예: feat/#1-branche-name, fix/#2-branch-name
+
+jobs:
+  move-issue-to-in-progress:
+    runs-on: ubuntu-latest
+    steps:
+      # 액션에 필요한 파일을 가져오기 위한 작업
+      - name: Checkout Action
+        uses: actions/checkout@v4 # https://github.com/actions/checkout
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # Github Actions에서 사용하는 기본 토큰
+          fetch-depth: 1 # 가장 최근 커밋만 가져오기
+          sparse-checkout: .github/actions # 액션 디렉토리만 가져오기
+
+      # Node.js 환경 설정
+      - name: Setup Node.js Environment
+        uses: ./.github/actions/setup-node
+
+      # PR을 In Progress Pipeline으로 이동하는 작업
+      - name: Move to In Progress Pipeline
+        uses: ./.github/actions/zenhub-move-issue
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          zenhub_token: ${{ secrets.ZENHUB_TOKEN }}
+          workspace_id: ${{ vars.ZENHUB_WORKSPACE_ID }} # https://github.com/ZenHubIO/API?tab=readme-ov-file#notes-1
+          pipeline_id: ${{ vars.ZENHUB_IN_PROGRESS_PIPELINE_ID }}
