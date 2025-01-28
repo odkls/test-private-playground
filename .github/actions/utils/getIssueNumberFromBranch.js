@@ -9,18 +9,15 @@ import * as github from "@actions/github";
 const getIssueNumberFromBranch = () => {
   let branchName = "";
 
-  core.info(`💬 이벤트 이름: ${JSON.stringify(github)}`);
-  if (github.event_name === "pull_request") {
+  if (github.context.eventName === "pull_request") {
     // PR 이벤트인 경우
     branchName = github.context.payload.pull_request.head.ref;
-  } else if (github.event_name === "create") {
+  } else if (github.context.eventName === "create") {
     // 브랜치 생성 이벤트인 경우
     branchName = github.context.ref;
   } else {
     return;
   }
-
-  core.info(`💬 브랜치 이름: ${branchName}`);
 
   const match = branchName.match(/#(\d+)/);
   if (!match) return;
